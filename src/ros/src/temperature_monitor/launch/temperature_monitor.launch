@@ -1,0 +1,14 @@
+<launch>
+    <arg name="arduino_device" default="/dev/ttyACM0" />
+    <arg name="output_file_name" />
+    <arg name="output" default="screen" />
+      
+
+    <node name="serial_node" pkg="rosserial_python" type="serial_node.py"
+          args="$(arg arduino_device)"
+          output="$(arg output)" />
+
+    <node name="temperature_file_exporter" pkg="temperature_monitor" type="temperature_file_exporter"
+          args="$(arg output_file_name)"
+          output="$(arg output)" />
+</launch>

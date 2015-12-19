@@ -1,3 +1,5 @@
 /.catkin_workspace
 /src/CMakeLists.txt
 /devel
+/install
+tags

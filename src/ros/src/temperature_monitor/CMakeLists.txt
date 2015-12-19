@@ -12,6 +12,9 @@ find_package(catkin REQUIRED COMPONENTS
   rosserial_client
 )
 
+find_package(Boost REQUIRED COMPONENTS date_time
+                                       program_options)
+
 ###################################
 ## catkin specific configuration ##
 ###################################
@@ -36,8 +39,17 @@ catkin_package(
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
+  include
+  ${Boost_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
 )
+
+file(GLOB SRC_FILES src/*.cpp)
+
+add_executable(temperature_file_exporter src/temperature_file_exporter.cpp
+                                         ${SRC_FILES})
+target_link_libraries(temperature_file_exporter ${catkin_LIBRARIES}
+                                                ${Boost_LIBRARIES})
 
 #############
 ## Install ##
